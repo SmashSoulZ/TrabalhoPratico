@@ -26,7 +26,7 @@
             android:layout_weight="0"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/menu" />
+            app:srcCompat="@drawable/mapa" />
 
         <TextView
             android:id="@+id/textView"
@@ -50,7 +50,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scaleType="centerCrop"
-        android:src="@drawable/mapa" />
+        android:src="@drawable/menu" />
 
     <LinearLayout
         android:layout_width="match_parent"
