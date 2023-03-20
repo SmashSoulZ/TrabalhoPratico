@@ -8,39 +8,6 @@
     <!-- Adicione as barras superiores -->
 
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#6fab80">
-
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="0"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/mapa" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-
-            android:layout_gravity="center"
-            android:layout_marginRight="20dp"
-            android:gravity="center_horizontal"
-
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:text="MAPA" />
-
-
-    </LinearLayout>
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
