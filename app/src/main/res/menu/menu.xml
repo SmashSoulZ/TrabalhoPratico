@@ -21,6 +21,10 @@
         android:icon="@drawable/baseline_report_24"
         android:title="Reportar"/>
     <item
+        android:id="@+id/nav_perfil"
+        android:icon="@drawable/baseline_3p_24"
+        android:title="Perfil"/>
+    <item
         android:id="@+id/nav_login"
         android:icon="@drawable/baseline_login_24"
         android:title="Login"/>

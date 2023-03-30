@@ -60,6 +60,10 @@ class MainActivity : AppCompatActivity() {
               Toast.makeText(this, "nav_reportar", Toast.LENGTH_SHORT).show()
               true
           }
+          R.id.nav_reportar -> {
+              Toast.makeText(this, "nav_perfil", Toast.LENGTH_SHORT).show()
+              true
+          }
           R.id.nav_login -> {
               Toast.makeText(this, "nav_login", Toast.LENGTH_SHORT).show()
               true
