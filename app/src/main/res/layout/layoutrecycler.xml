@@ -14,10 +14,18 @@
     </TextView>
 
     <TextView
-        android:id="@+id/txthora"
-        android:text="hora"
+        android:id="@+id/txthoraE"
+        android:text="horaE"
         android:layout_below="@id/txtdata"
         android:layout_alignLeft="@+id/txtdata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+    <TextView
+        android:id="@+id/txthoraS"
+        android:text="horaS"
+        android:layout_below="@id/txtdata"
+        android:layout_alignRight="@+id/txtlugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>

@@ -2,6 +2,7 @@ package com.example.myapplication.dataclasses
 
 data class registos (
     val data: String,
-    val hora: String,
-    val lugar: Int
+    val horaE: String,
+    val horaS: String,
+    val lugar: String
         )

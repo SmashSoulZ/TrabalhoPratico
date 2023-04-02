@@ -28,8 +28,9 @@ class LineAdapter(val list: ArrayList<registos>): RecyclerView.Adapter<LineViewH
         val currentPlace = list[position]
 
         holder._data.text = currentPlace.data
-        holder._hora.text = currentPlace.hora
-        holder._lugar.text = currentPlace.lugar.toString()
+        holder._horaE.text = currentPlace.horaE
+        holder._horaS.text = currentPlace.horaS
+        holder._lugar.text = currentPlace.lugar
 
 
 
@@ -40,12 +41,14 @@ class LineAdapter(val list: ArrayList<registos>): RecyclerView.Adapter<LineViewH
 class LineViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
     val _data: TextView
-    val _hora: TextView
+    val _horaE: TextView
+    val _horaS: TextView
     val _lugar: TextView
 
     init {
         _data = itemView.findViewById(R.id.txtdata)
-        _hora = itemView.findViewById(R.id.txthora)
+        _horaE = itemView.findViewById(R.id.txthoraE)
+        _horaS = itemView.findViewById(R.id.txthoraS)
         _lugar = itemView.findViewById(R.id.txtlugar)
     }
 
