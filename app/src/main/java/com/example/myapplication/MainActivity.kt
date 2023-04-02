@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -60,8 +61,9 @@ class MainActivity : AppCompatActivity() {
               Toast.makeText(this, "nav_reportar", Toast.LENGTH_SHORT).show()
               true
           }
-          R.id.nav_reportar -> {
+          R.id.nav_perfil -> {
               Toast.makeText(this, "nav_perfil", Toast.LENGTH_SHORT).show()
+              startActivity(Intent(this, perfil::class.java))
               true
           }
           R.id.nav_login -> {
