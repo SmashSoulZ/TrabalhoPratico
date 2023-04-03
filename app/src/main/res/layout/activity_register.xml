@@ -25,7 +25,7 @@
         android:background="@drawable/costum_input"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:hint="Email"
+        android:hint="Nome de Utilizador"
         />
 
     <EditText
@@ -37,6 +37,17 @@
         android:layout_marginTop="20dp"
         android:paddingStart="12dp"
         android:layout_centerHorizontal="true"
+        android:hint="Email"
+        />
+    <EditText
+        android:id="@+id/E3"
+        android:layout_width="265dp"
+        android:layout_height="50dp"
+        android:background="@drawable/costum_input"
+        android:layout_below="@id/E2"
+        android:layout_marginTop="20dp"
+        android:paddingStart="12dp"
+        android:layout_centerHorizontal="true"
         android:hint="Password"
         />
 
@@ -44,21 +55,13 @@
         android:id="@+id/button"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:layout_below="@id/E2"
+        android:layout_below="@id/E3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
         android:text="Entrar"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Não tem conta? Clique Aqui"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="16dp"
-        android:layout_marginBottom="25dp"
-        />
+
 
 
 </RelativeLayout>
