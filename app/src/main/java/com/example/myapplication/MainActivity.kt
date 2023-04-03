@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity() {
           }
           R.id.nav_login -> {
               Toast.makeText(this, "nav_login", Toast.LENGTH_SHORT).show()
+              startActivity(Intent(this, Login::class.java))
               true
           }
           R.id.nav_registar -> {
