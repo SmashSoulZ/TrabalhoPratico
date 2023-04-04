@@ -40,15 +40,7 @@
             android:layout_marginLeft="8dp"
             />
 
-        <Button
-            android:id="@+id/btn_filtros"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="filtros"
-            android:backgroundTint="#6fab80"
-            android:textColor="@color/white"
-            android:layout_marginLeft="8dp"
-            />
+
     </LinearLayout>
 
 </LinearLayout>
