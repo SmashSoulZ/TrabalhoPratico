@@ -62,10 +62,12 @@ class MainActivity : AppCompatActivity() {
           }
           R.id.nav_login -> {
               Toast.makeText(this, "nav_login", Toast.LENGTH_SHORT).show()
+              startActivity(Intent(this, Login::class.java))
               true
           }
           R.id.nav_registar -> {
               Toast.makeText(this, "nav_registar", Toast.LENGTH_SHORT).show()
+              startActivity(Intent(this, Register::class.java))
               true
           }
             else -> {super.onOptionsItemSelected(item)}

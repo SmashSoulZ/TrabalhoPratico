@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grey"
+    tools:context=".Login">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="430dp"
+        android:layout_marginTop="-55dp"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
+
+    <EditText
+        android:id="@+id/E1"
+        android:layout_width="265dp"
+        android:layout_height="50dp"
+        android:paddingStart="12dp"
+        android:background="@drawable/costum_input"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:hint="Nome de Utilizador"
+        />
+
+    <EditText
+        android:id="@+id/E2"
+        android:layout_width="265dp"
+        android:layout_height="50dp"
+        android:background="@drawable/costum_input"
+        android:layout_below="@id/E1"
+        android:layout_marginTop="20dp"
+        android:paddingStart="12dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Email"
+        />
+    <EditText
+        android:id="@+id/E3"
+        android:layout_width="265dp"
+        android:layout_height="50dp"
+        android:background="@drawable/costum_input"
+        android:layout_below="@id/E2"
+        android:layout_marginTop="20dp"
+        android:paddingStart="12dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Password"
+        />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/E3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:text="Entrar"
+        />
+
+
+
+
+</RelativeLayout>
