@@ -15,26 +15,13 @@ import android.widget.PopupWindow
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-        //pop up definicoes
-        //fazer funcionar
-
-       val btn_filtros = findViewById<Button>(R.id.btn_filtros)
-
-        btn_filtros.setOnClickListener {
-            val dialogBinding = layoutInflater.inflate(R.layout.layout_definicoes, null)
-
-            val myDialog = Dialog ( this)
-            myDialog.setContentView(dialogBinding)
-
-            myDialog.setCancelable(true)
-            myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            myDialog.show()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,7 +37,14 @@ class MainActivity : AppCompatActivity() {
               true
           }
           R.id.nav_filtros -> {
-              Toast.makeText(this, "nav_filtros", Toast.LENGTH_SHORT).show()
+              val dialogBinding = layoutInflater.inflate(R.layout.layout_definicoes, null)
+
+              val myDialog = Dialog ( this)
+              myDialog.setContentView(dialogBinding)
+
+              myDialog.setCancelable(true)
+              myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+              myDialog.show()
               true
           }
           R.id.nav_lotacao -> {
