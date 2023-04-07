@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "522192309694",
+    "project_id": "ezpark-f335f",
+    "storage_bucket": "ezpark-f335f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522192309694:android:7bc5658efbecc000fc7def",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522192309694-2h0o29es90b8e4nntokof6jharo9k5i1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV9x4-c5bLr-vVoVrZoZUoDS6puOChqLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522192309694-2h0o29es90b8e4nntokof6jharo9k5i1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
