@@ -33,8 +33,8 @@ class perfil : AppCompatActivity() {
         }
 
         val total=myList.size
-        val NTT = findViewById<TextView>(R.id.NTT)
-        NTT.text = "Nº Total de Estacionamentos: "+total.toString()
+        //val NTT = findViewById<TextView>(R.id.NTT)
+        //NTT.text = "Nº Total de Estacionamentos: "+total.toString()
 
 
         recycler_view = findViewById<RecyclerView>(R.id.recView)
