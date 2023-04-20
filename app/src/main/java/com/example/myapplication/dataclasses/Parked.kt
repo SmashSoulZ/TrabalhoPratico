@@ -1,6 +1,6 @@
 package com.example.myapplication.dataclasses
 
-data class ParkingSpot(
+data class Parked(
     val id: String = "",
     val parked: Boolean = false
 )
