@@ -26,6 +26,7 @@
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
         android:hint="Nome de Utilizador"
+
         />
 
     <EditText
@@ -49,6 +50,7 @@
         android:paddingStart="12dp"
         android:layout_centerHorizontal="true"
         android:hint="Password"
+
         />
 
     <Button
@@ -61,7 +63,19 @@
         android:text="Entrar"
         />
 
-
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="181dp"
+        android:layout_marginBottom="21dp"
+        android:text="Ja tenho Conta" />
 
 
 </RelativeLayout>

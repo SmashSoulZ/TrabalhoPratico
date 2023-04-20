@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -51,14 +51,16 @@
         />
 
     <TextView
+        android:id="@+id/TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Não tem conta? Clique Aqui"
+        android:layout_below="@+id/button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:textSize="16dp"
+        android:layout_marginTop="84dp"
         android:layout_marginBottom="25dp"
-        />
+        android:text="Não tem conta? Clique Aqui"
+        android:textSize="16dp" />
 
 
-</RelativeLayout>
+</LinearLayout>
