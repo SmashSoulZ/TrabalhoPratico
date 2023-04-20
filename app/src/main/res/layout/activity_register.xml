@@ -26,6 +26,7 @@
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
         android:hint="Nome de Utilizador"
+
         />
 
     <EditText
