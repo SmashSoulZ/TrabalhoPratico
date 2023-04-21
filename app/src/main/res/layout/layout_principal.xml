@@ -10,14 +10,7 @@
         android:id="@+id/top_layout"
         android:background="#6fab80">
 
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="0"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/mapa" />
+
 
         <TextView
             android:id="@+id/textView"

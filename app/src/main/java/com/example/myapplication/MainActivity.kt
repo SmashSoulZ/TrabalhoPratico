@@ -20,9 +20,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -55,6 +52,7 @@ class MainActivity : AppCompatActivity() {
           }
           R.id.nav_reportar -> {
               Toast.makeText(this, "nav_reportar", Toast.LENGTH_SHORT).show()
+              startActivity(Intent(this, Report::class.java))
               true
           }
           R.id.nav_perfil -> {
