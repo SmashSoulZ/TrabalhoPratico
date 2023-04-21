@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
           R.id.nav_mapa -> {
               Toast.makeText(this,"nav_mapa", Toast.LENGTH_SHORT).show()
+              startActivity(Intent(this, parque::class.java))
               true
           }
           R.id.nav_filtros -> {
