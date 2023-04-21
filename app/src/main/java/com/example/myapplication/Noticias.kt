@@ -1,57 +1,31 @@
-package com.example.myapplication
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import com.example.myapplication.adapter.NewsAdaptor
-import com.example.myapplication.dataclasses.News
+import com.example.myapplication.R
+import com.example.myapplication.dataclasses.NewsApiResponse
+import com.google.gson.Gson
+import java.net.URL
 
 
 class Noticias : AppCompatActivity() {
 
-    private lateinit var adaptor: NewsAdaptor
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_noticias)
+        setContentView(R.layout.news_recycler)
+        val apiKey = "167ece40127d45a9a9691d08a1b45906"
+        val url = "https://newsapi.org/v2/everything?q=bitcoin&from=2023-03-21&sortBy=publishedAt&apiKey=$apiKey"
 
-        val recyclerView : RecyclerView = findViewById(R.id.recyclerview)
+        recyclerView = findViewById(R.id.recyclerview)
+
+        // Fetch the news articles from the News API
+        val request = URL(url).readText()
+        val response = Gson().fromJson(request, NewsApiResponse::class.java)
+
+        // Set up the RecyclerView with the fetched news articles
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-        adaptor = NewsAdaptor()
-        recyclerView.adapter = adaptor
-
+        recyclerView.adapter = NewsAdapter(response.articles)
     }
-
-    fun fetchNews(){
-val queue = Volley.newRequestQueue(this)
-        val url  = "https://saurav.tech/NewsAPI/top-headlines/category/general/in.json"
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET,url,null,
-            Response.Listener {
-                val newsJsonArray = it.getJSONArray("articles")
-                val newsArray = ArrayList<News>()
-                for (i in 0 until newsJsonArray.length()){
-                    val newsJsonObject = newsJsonArray.getJSONObject(i)
-                    val news = News(
-                        newsJsonObject.getString("titlle"),
-                        newsJsonObject.getString("author"),
-                        newsJsonObject.getString("url"),
-                        newsJsonObject.getString("urlToImage")
-                    )
-                    newsArray.add(news)
-                }
-                adaptor.updateDate(newsArray)
-            },
-            Response.ErrorListener {
-
-            }
-        )
-        queue.add(jsonObjectRequest)
-    }
-
 }
