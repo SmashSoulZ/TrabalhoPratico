@@ -1,13 +1,14 @@
 package com.example.myapplication.adapter
 
-import Article
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-
+import com.example.myapplication.api.Article
+import com.squareup.picasso.Picasso
 
 
 class ArticlesAdapter(val articles: List<Article>): RecyclerView.Adapter<ArticlesViewHolder>() {
@@ -26,10 +27,13 @@ class ArticlesAdapter(val articles: List<Article>): RecyclerView.Adapter<Article
 }
 
 class ArticlesViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
+    private val image : ImageView = itemView.findViewById(R.id.image)
     private val author: TextView = itemView.findViewById(R.id.author)
     private val title:TextView = itemView.findViewById(R.id.title)
 
     fun bind(article: Article) {
+
+        Picasso.get().load(article.urlToImage).into(image)
         author.text = article.author
         title.text = article.title
     }
