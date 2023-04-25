@@ -8,25 +8,26 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.api.Article
+import com.example.myapplication.api.TopHeadlinesResponse
 import com.squareup.picasso.Picasso
 
 
-class ArticlesAdapter(val articles: List<Article>): RecyclerView.Adapter<ArticlesViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
+class ArticlesAdapter(val articles: List<Article>): RecyclerView.Adapter<TopHeadlinesResponseViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopHeadlinesResponseViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview, parent, false)
-        return ArticlesViewHolder(view)
+        return TopHeadlinesResponseViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return articles.size
     }
 
-    override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TopHeadlinesResponseViewHolder, position: Int) {
         return holder.bind(articles[position])
     }
 }
 
-class ArticlesViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
+class TopHeadlinesResponseViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
     private val image : ImageView = itemView.findViewById(R.id.image)
     private val author: TextView = itemView.findViewById(R.id.author)
     private val title:TextView = itemView.findViewById(R.id.title)
@@ -39,3 +40,4 @@ class ArticlesViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
     }
 
 }
+
