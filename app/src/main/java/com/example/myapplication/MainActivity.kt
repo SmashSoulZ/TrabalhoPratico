@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import Noticias
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -10,9 +9,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.PopupWindow
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
