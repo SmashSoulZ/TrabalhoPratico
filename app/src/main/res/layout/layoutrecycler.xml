@@ -9,6 +9,7 @@
         android:layout_margin="10dp"
         android:textStyle="bold"
         android:text="Data"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
@@ -19,12 +20,14 @@
         android:layout_below="@id/txtdata"
         android:layout_alignLeft="@+id/txtdata"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content">
     </TextView>
     <TextView
         android:id="@+id/txthoraS"
         android:text="horaS"
         android:layout_below="@id/txtdata"
+        android:textColor="@color/black"
         android:layout_alignRight="@+id/txtlugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -33,12 +36,19 @@
     <TextView
         android:id="@+id/txtlugar"
         android:text="lugar"
+        android:textColor="@color/black"
         android:layout_alignTop="@id/txtdata"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="37dp"
+        >
     </TextView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/divider"/>
 
 
 </RelativeLayout>

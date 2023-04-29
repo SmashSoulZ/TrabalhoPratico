@@ -3,6 +3,7 @@ package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +25,7 @@ class perfil : AppCompatActivity() {
 
 
         for (i in 0 until 20) {
-            val randomLugar = Random.nextInt(0, 32)
+            val randomLugar = Random.nextInt(0, 10)
             val randomDay = Random.nextInt(1, 31)
             val randomMonth = Random.nextInt(1, 12)
             val randomHourE = Random.nextInt(0, 24)
@@ -34,8 +35,12 @@ class perfil : AppCompatActivity() {
         }
 
         val total = myList.size
+
         //val NTT = findViewById<TextView>(R.id.NTT)
         //NTT.text = "Nº Total de Estacionamentos: "+total.toString()
+
+        val FLL = findViewById<TextView>(R.id.h2)
+        FLL.text = "Lugar Preferido: " + favLot()
 
         recycler_view = findViewById<RecyclerView>(R.id.recView)
         recycler_view.adapter = LineAdapter(myList)
@@ -43,6 +48,32 @@ class perfil : AppCompatActivity() {
         swipeToDelete()
 
     }
+
+    private fun favLot(): Int {
+        val countMap = mutableMapOf<Int, Int>()
+        var mostRepeatedNum = 0
+        var maxCount = 0
+        //var t=0
+
+        for (i in 0 until myList.size) {
+            val lugarNum = myList[i].lugar.filter { it.isDigit() }.toInt()
+
+            if (countMap.containsKey(lugarNum)) {
+                countMap[lugarNum] = countMap[lugarNum]!! + 1
+            } else {
+                countMap[lugarNum] = 1
+            }
+
+            if (countMap[lugarNum]!! > maxCount) {
+                maxCount = countMap[lugarNum]!!
+                mostRepeatedNum = lugarNum
+                //t++
+            }
+        }
+        //Toast.makeText(applicationContext,"$t",Toast.LENGTH_SHORT).show()
+        return mostRepeatedNum
+    }
+
 
     private fun swipeToDelete() {
         val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
@@ -63,7 +94,7 @@ class perfil : AppCompatActivity() {
                 myList.removeAt(position)
                 Snackbar.make(
                     viewHolder.itemView,
-                    "Item ' $position' apagado",
+                    "Item '$position' apagado",
                     Snackbar.LENGTH_SHORT
                 ).apply {
                     setAction("Desfazer"){

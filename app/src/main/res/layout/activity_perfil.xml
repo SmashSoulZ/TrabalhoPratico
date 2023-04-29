@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
+
         android:id="@+id/topLayout">
 
         <ImageView
@@ -30,6 +31,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:paddingTop="16dp"
+            android:textColor="@color/black"
             android:text="exemplo"/>
 
         <LinearLayout
@@ -39,23 +41,25 @@
 
             >
 
-        <TextView
-            android:id="@+id/t1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:paddingTop="8dp"
-            android:text="Nº mecanográfico:"
-            android:layout_weight="1"
-            />
-        <TextView
-            android:id="@+id/t2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:paddingTop="8dp"
-            android:text="22700"
-            />
+            <TextView
+                android:id="@+id/t1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:paddingTop="8dp"
+                android:textColor="@color/black"
+                android:text="Nº mecanográfico:"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:id="@+id/t2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingTop="8dp"
+                android:text="22700"
+                />
         </LinearLayout>
 
     </LinearLayout>
@@ -63,17 +67,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/topLayout"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="10dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:id="@+id/historicoLabel"
-            android:text="Histórico"
-            android:textSize="32dp"
-            android:textStyle="bold"
+            android:padding="8dp"
+            >
 
-            />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/h1"
+                android:text="Histórico"
+                android:textColor="@color/black"
+                android:textSize="32dp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                />
+            <TextView
+                android:id="@+id/h2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:paddingTop="8dp"
+                android:layout_marginRight="12dp"
+                android:textStyle="bold"
+                android:text="Lugar Preferido: "
+
+                />
+        </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recView"
@@ -81,6 +109,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_below="@id/historicoLabel"
+            android:divider="@drawable/divider"
+            android:dividerHeight="1dp"
             />
 
     </RelativeLayout>
