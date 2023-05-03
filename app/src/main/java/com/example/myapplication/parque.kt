@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.app.Dialog
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
@@ -56,6 +57,7 @@ class parque : AppCompatActivity() {
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_principal)
@@ -91,9 +93,11 @@ class parque : AppCompatActivity() {
         }
 
         val bqr = findViewById<Button>(R.id.bqrcode)
+
         bqr.setOnClickListener {
             val intent = Intent(this, QrCodeScanner::class.java)
             startActivity(intent)
+
         }
 
         collectionRef.get()
@@ -231,6 +235,9 @@ class parque : AppCompatActivity() {
         }
 
     }
+    companion object {
+        const val REQUEST_CODE = 123
+    }
 
     private fun showParkingTime(parkingId: String, parkingTime: Int) {
         val message = "Tempo de estacionamento restante para o estacionamento $parkingId: $parkingTime minutos"
@@ -315,8 +322,6 @@ class parque : AppCompatActivity() {
             }, parkingTime * 60 * 1000L) // multiplica o tempo em minutos por 60 segundos e 1000 milissegundos para obter o tempo em milissegundos
         }
     }
-
-
 
 
 
