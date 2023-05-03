@@ -255,7 +255,7 @@ class QrCodeScanner : AppCompatActivity() {
                     println("............................lll...........")
                     println(scannedValue)
                     println(parkingTime)
-                    onDestroy()
+
 
                 }
             }
@@ -271,16 +271,13 @@ class QrCodeScanner : AppCompatActivity() {
         docRef.get().addOnSuccessListener { document ->
             val parked = document.getBoolean("parked") ?: false
             val newParked = !parked
-          docRef.update("tempo", parkingTime)
-
-
+            docRef.update("tempo", parkingTime)
             docRef.update("parked", newParked)
             val message = "O lugar com ID $scannedValue foi atualizado!"
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-
-
-
-                  }
+            finish() // Encerra esta atividade
+            val intent = Intent(this, parque::class.java)
+            startActivity(intent) // Inicia a atividade Parque
+        }
     }
-
 }
