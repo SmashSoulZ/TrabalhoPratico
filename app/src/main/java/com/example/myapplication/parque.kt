@@ -112,7 +112,9 @@ class parque : AppCompatActivity() {
                             marginEnd = resources.getDimensionPixelSize(R.dimen.cell_spacing)
                         }
                         setOnClickListener {
-                            showParkingTime(document.id, parkingTime)
+                            if (!parked) {
+                                showParkingTime(document.id, parkingTime)
+                            }
                         }
                     }
 
@@ -137,6 +139,7 @@ class parque : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
+
         val switch1 = dialog.findViewById<Switch>(R.id.switch1)
 
         switch1?.setOnCheckedChangeListener { _, isChecked ->
@@ -226,6 +229,7 @@ class parque : AppCompatActivity() {
                 }
             }
         }
+
     }
 
     private fun showParkingTime(parkingId: String, parkingTime: Int) {
