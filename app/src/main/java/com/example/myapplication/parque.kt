@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.example.myapplication.QrCodeScanner.Companion.PARAM_ID
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -27,6 +28,9 @@ class parque : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_principal)
 
+        val scannedValue = intent.getStringExtra(PARAM_ID)
+        println("............................lll...........")
+        println(scannedValue)
         val button2 = findViewById<Button>(R.id.filtros)
 
         button2.setOnClickListener {

@@ -134,6 +134,7 @@ class QrCodeScanner : AppCompatActivity() {
                             cameraSource.stop()
                             val intent = Intent(this@QrCodeScanner, parque::class.java)
                             intent.putExtra(PARAM_ID, scannedValue)
+
                             startActivityForResult(intent, QRCodeRequestCode1)
                         }
                         //Toast.makeText(this@QrCodeScanner, "value- $scannedValue", Toast.LENGTH_SHORT).show()
