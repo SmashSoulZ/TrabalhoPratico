@@ -56,7 +56,7 @@ class parque : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     val parked = document.getBoolean("parked") ?: false
-
+                    val parkingTime = document.getLong("tempo")?.toInt() ?: 0
                     val rect = LinearLayout(this).apply {
                         id = document.id.hashCode()
                         setBackgroundResource(R.drawable.border)
@@ -68,8 +68,7 @@ class parque : AppCompatActivity() {
                             marginEnd = resources.getDimensionPixelSize(R.dimen.cell_spacing)
                         }
                         setOnClickListener {
-                            val parkingTime = document.getLong("parkingTime")?.toInt() ?: 0
-                            showParkingTime(parkingTime)
+                            showParkingTime(document.id, parkingTime)
                         }
                     }
 
@@ -185,8 +184,8 @@ class parque : AppCompatActivity() {
         }
     }
 
-    private fun showParkingTime(parkingTime: Int) {
-        val message = "Tempo de estacionamento restante: $parkingTime minutos"
+    private fun showParkingTime(parkingId: String, parkingTime: Int) {
+        val message = "Tempo de estacionamento restante para o estacionamento $parkingId: $parkingTime minutos"
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
     private fun showInputDialog() {
@@ -239,19 +238,36 @@ class parque : AppCompatActivity() {
             val newParked = !parked
             val newColor = if (newParked) Color.GREEN else Color.RED
             val rect = findViewById<LinearLayout>(parkingId.hashCode())
+            val novo = 0
+            docRef.update("tempo", parkingTime)
             rect.setBackgroundColor(newColor)
+
             docRef.update("parked", newParked)
+            val message = "O lugar com ID $parkingId foi atualizado!"
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+            docRef.get().addOnSuccessListener { document ->
+                val updatedParkingTime = document.getLong("tempo")?.toInt() ?: 0
+                rect.setOnClickListener {
+                    showParkingTime(document.id, updatedParkingTime)
+                }
+            }
 
             // Espera pelo tempo de estacionamento
             Handler().postDelayed({
                 // Altera a cor do estacionamento para verde
                 rect.setBackgroundColor(Color.GREEN)
                 docRef.update("parked", true) // Define "parked" como falso para indicar que o estacionamento está livre
-                val message = "O lugar com ID $parkingId está disponível!"
+                docRef.update("tempo", novo)
+                docRef.update("parkingTime", parkingTime)
+                val message = "O lugar com $parkingId ficou disponível!"
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show() // Mostra o pop-up com a mensagem
+
+
             }, parkingTime * 60 * 1000L) // multiplica o tempo em minutos por 60 segundos e 1000 milissegundos para obter o tempo em milissegundos
         }
     }
+
 
 
 
