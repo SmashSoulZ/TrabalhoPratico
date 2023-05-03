@@ -67,7 +67,12 @@ class parque : AppCompatActivity() {
                             marginStart = resources.getDimensionPixelSize(R.dimen.cell_spacing)
                             marginEnd = resources.getDimensionPixelSize(R.dimen.cell_spacing)
                         }
+                        setOnClickListener {
+                            val parkingTime = document.getLong("parkingTime")?.toInt() ?: 0
+                            showParkingTime(parkingTime)
+                        }
                     }
+
 
                     // Adiciona um TextView no meio do retângulo
                     val textView = TextView(this).apply {
@@ -178,37 +183,22 @@ class parque : AppCompatActivity() {
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
     }
 
-    object ColorFilterGenerator {
-        private val colorFilterMap = mutableMapOf<Int, PorterDuffColorFilter>()
-
-        fun from(color: Int): PorterDuffColorFilter {
-            return colorFilterMap.getOrPut(color) { PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP) }
-        }
+    private fun showParkingTime(parkingTime: Int) {
+        val message = "Tempo de estacionamento restante: $parkingTime minutos"
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-
-
     private fun showInputDialog() {
         val db = FirebaseFirestore.getInstance()
         val inputDialog = AlertDialog.Builder(this)
-        inputDialog.setTitle("Digite o ID do estacionamento:")
+        inputDialog.setTitle("Estacionar:")
         val inputLayout = LinearLayout(this)
         inputLayout.orientation = LinearLayout.VERTICAL
 
         // Campo ID
         val idInput = EditText(this)
+        idInput.hint = "Número do estacionamento"
         inputLayout.addView(idInput)
 
         // Campo tempo de estacionamento
@@ -257,6 +247,8 @@ class parque : AppCompatActivity() {
                 // Altera a cor do estacionamento para verde
                 rect.setBackgroundColor(Color.GREEN)
                 docRef.update("parked", true) // Define "parked" como falso para indicar que o estacionamento está livre
+                val message = "O lugar com ID $parkingId está disponível!"
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show() // Mostra o pop-up com a mensagem
             }, parkingTime * 60 * 1000L) // multiplica o tempo em minutos por 60 segundos e 1000 milissegundos para obter o tempo em milissegundos
         }
     }
