@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.Toast
+import com.example.myapplication.QrCodeScanner.Companion.PARAM_ID
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -59,6 +60,9 @@ class parque : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_principal)
 
+        val scannedValue = intent.getStringExtra(PARAM_ID)
+        println("............................lll...........")
+        println(scannedValue)
         val button2 = findViewById<Button>(R.id.filtros)
 
         button2.setOnClickListener {
@@ -85,6 +89,13 @@ class parque : AppCompatActivity() {
         button.setOnClickListener {
             showInputDialog()
         }
+
+        val bqr = findViewById<Button>(R.id.bqrcode)
+        bqr.setOnClickListener {
+            val intent = Intent(this, QrCodeScanner::class.java)
+            startActivity(intent)
+        }
+
         collectionRef.get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
