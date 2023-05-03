@@ -1,17 +1,24 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.MenuItem
 import android.view.SurfaceHolder
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -21,6 +28,7 @@ import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
+import com.google.firebase.firestore.FirebaseFirestore
 import java.io.IOException
 
 class QrCodeScanner : AppCompatActivity() {
@@ -135,7 +143,7 @@ class QrCodeScanner : AppCompatActivity() {
                             val intent = Intent(this@QrCodeScanner, parque::class.java)
                             intent.putExtra(PARAM_ID, scannedValue)
 
-                            startActivityForResult(intent, QRCodeRequestCode1)
+                            showInputDialog2()
                         }
                         //Toast.makeText(this@QrCodeScanner, "value- $scannedValue", Toast.LENGTH_SHORT).show()
 
@@ -212,6 +220,67 @@ class QrCodeScanner : AppCompatActivity() {
         startActivity(intent)
         finish()
 
+    }
+
+    private fun showInputDialog2() {
+
+        val db = FirebaseFirestore.getInstance()
+        val inputDialog = AlertDialog.Builder(this)
+        inputDialog.setTitle("Estacionar: ${scannedValue}")
+        val inputLayout = LinearLayout(this)
+        inputLayout.orientation = LinearLayout.VERTICAL
+
+
+
+        // Campo tempo de estacionamento
+        val timeInput = EditText(this)
+        timeInput.hint = "Tempo de estacionamento (minutos)"
+        inputLayout.addView(timeInput)
+
+        inputDialog.setView(inputLayout)
+        inputDialog.setPositiveButton("OK") { _, _ ->
+
+            val parkingTime = timeInput.text.toString().toIntOrNull() ?: 0 // valor padrão de 0 minutos
+            Log.d(ContentValues.TAG, "tempo: ${parkingTime}")
+
+            // Verifica se o estacionamento está livre
+            db.collection("Parques").document(scannedValue).get().addOnSuccessListener { document ->
+                val parked = document.getBoolean("parked") ?: false
+                if (!parked) {
+                    // Estacionamento ocupado, exibe mensagem de erro
+                    Toast.makeText(this, "Este estacionamento está ocupado. Por favor, selecione outro.", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Estacionamento disponível, chama updateParking
+                    updateParking(scannedValue, parkingTime)
+                    println("............................lll...........")
+                    println(scannedValue)
+                    println(parkingTime)
+                    onDestroy()
+
+                }
+            }
+
+        }
+        inputDialog.setNegativeButton("Cancelar", null)
+        inputDialog.show()
+    }
+
+    private fun updateParking(scannedValue: String, parkingTime: Int) {
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("Parques").document(scannedValue)
+        docRef.get().addOnSuccessListener { document ->
+            val parked = document.getBoolean("parked") ?: false
+            val newParked = !parked
+          docRef.update("tempo", parkingTime)
+
+
+            docRef.update("parked", newParked)
+            val message = "O lugar com ID $scannedValue foi atualizado!"
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+
+
+                  }
     }
 
 }
