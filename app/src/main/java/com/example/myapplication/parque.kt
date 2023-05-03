@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -52,6 +53,13 @@ class parque : AppCompatActivity() {
         button.setOnClickListener {
             showInputDialog()
         }
+
+        val bqr = findViewById<Button>(R.id.bqrcode)
+        bqr.setOnClickListener {
+            val intent = Intent(this, QrCodeScanner::class.java)
+            startActivity(intent)
+        }
+
         collectionRef.get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
