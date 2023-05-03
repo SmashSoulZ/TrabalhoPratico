@@ -1,7 +1,9 @@
 package com.example.myapplication
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -9,17 +11,21 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.PopupWindow
-import android.widget.Toast
+import android.widget.*
 
 class MainActivity : AppCompatActivity() {
 
+    val PREFS_FILTRAR = "MyPrefs"
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var switch1: Switch
+    private lateinit var switch2: Switch
+    private lateinit var switch3: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

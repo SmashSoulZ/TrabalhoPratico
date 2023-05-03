@@ -2,8 +2,11 @@ package com.example.myapplication
 
 import android.content.ContentValues.TAG
 import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.*
@@ -17,7 +20,7 @@ import com.google.firebase.ktx.Firebase
 
 
 class parque : AppCompatActivity() {
-    private var switch1Ativo = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +83,7 @@ class parque : AppCompatActivity() {
 
                     gridLayout.addView(rect)
 
-                    Log.d(TAG, "ID do estacionamento: ${document.id}")
+                    Log.d(TAG, "ID do estacionamento: ${document.id}, parked: $parked")
                 }
             }
             .addOnFailureListener { exception ->
@@ -188,20 +191,57 @@ class parque : AppCompatActivity() {
 
     }
 
+    object ColorFilterGenerator {
+        private val colorFilterMap = mutableMapOf<Int, PorterDuffColorFilter>()
+
+        fun from(color: Int): PorterDuffColorFilter {
+            return colorFilterMap.getOrPut(color) { PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP) }
+        }
+    }
+
+
     private fun showInputDialog() {
+        val db = FirebaseFirestore.getInstance()
         val inputDialog = AlertDialog.Builder(this)
         inputDialog.setTitle("Digite o ID do estacionamento:")
-        val input = EditText(this)
-        inputDialog.setView(input)
+        val inputLayout = LinearLayout(this)
+        inputLayout.orientation = LinearLayout.VERTICAL
+
+        // Campo ID
+        val idInput = EditText(this)
+        inputLayout.addView(idInput)
+
+        // Campo tempo de estacionamento
+        val timeInput = EditText(this)
+        timeInput.hint = "Tempo de estacionamento (minutos)"
+        inputLayout.addView(timeInput)
+
+        inputDialog.setView(inputLayout)
         inputDialog.setPositiveButton("OK") { _, _ ->
-            val parkingId = input.text.toString()
-            updateParking(parkingId)
+            val parkingId = idInput.text.toString()
+            val parkingTime = timeInput.text.toString().toIntOrNull() ?: 0 // valor padrão de 0 minutos
+            Log.d(TAG, "tempo: ${parkingTime}")
+
+            // Verifica se o estacionamento está livre
+            db.collection("Parques").document(parkingId).get().addOnSuccessListener { document ->
+                val parked = document.getBoolean("parked") ?: false
+                if (!parked) {
+                    // Estacionamento ocupado, exibe mensagem de erro
+                    Toast.makeText(this, "Este estacionamento está ocupado. Por favor, selecione outro.", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Estacionamento disponível, chama updateParking
+                    updateParking(parkingId, parkingTime)
+                }
+            }
+
         }
         inputDialog.setNegativeButton("Cancelar", null)
         inputDialog.show()
     }
 
-    private fun updateParking(parkingId: String) {
+
+
+    private fun updateParking(parkingId: String, parkingTime: Int) {
         val db = FirebaseFirestore.getInstance()
         val docRef = db.collection("Parques").document(parkingId)
         docRef.get().addOnSuccessListener { document ->
@@ -211,8 +251,16 @@ class parque : AppCompatActivity() {
             val rect = findViewById<LinearLayout>(parkingId.hashCode())
             rect.setBackgroundColor(newColor)
             docRef.update("parked", newParked)
+
+            // Espera pelo tempo de estacionamento
+            Handler().postDelayed({
+                // Altera a cor do estacionamento para verde
+                rect.setBackgroundColor(Color.GREEN)
+                docRef.update("parked", true) // Define "parked" como falso para indicar que o estacionamento está livre
+            }, parkingTime * 60 * 1000L) // multiplica o tempo em minutos por 60 segundos e 1000 milissegundos para obter o tempo em milissegundos
         }
     }
+
 
 
 
