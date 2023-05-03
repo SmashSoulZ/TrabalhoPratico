@@ -43,7 +43,7 @@
 
         <Button
 
-            android:id="@+id/salvar"
+            android:id="@+id/btnSalvar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
