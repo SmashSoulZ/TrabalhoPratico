@@ -41,21 +41,7 @@ class MainActivity : AppCompatActivity() {
               startActivity(Intent(this, parque::class.java))
               true
           }
-          R.id.nav_filtros -> {
-              val dialogBinding = layoutInflater.inflate(R.layout.layout_definicoes, null)
 
-              val myDialog = Dialog ( this)
-              myDialog.setContentView(dialogBinding)
-
-              myDialog.setCancelable(true)
-              myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-              myDialog.show()
-              true
-          }
-          R.id.nav_lotacao -> {
-              Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
-              true
-          }
           R.id.nav_reportar -> {
               Toast.makeText(this, "nav_reportar", Toast.LENGTH_SHORT).show()
               startActivity(Intent(this, Report::class.java))
