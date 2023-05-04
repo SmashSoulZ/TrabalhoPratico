@@ -22,4 +22,9 @@
         android:id="@+id/nav_noticias"
         android:icon="@drawable/baseline_filter_list_24"
         android:title="Noticias"/>
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/baseline_filter_list_24"
+        android:title="Logout"/>
+
 </menu>

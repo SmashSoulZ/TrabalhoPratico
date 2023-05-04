@@ -13,6 +13,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.*
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,6 +58,12 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_noticias -> {
                 Toast.makeText(this, "nav_noticias", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, Noticias::class.java))
+                true
+            }
+            R.id.nav_logout -> {
+                FirebaseAuth.getInstance().signOut() // sign out the user from Firebase Authentication
+                startActivity(Intent(this, Login::class.java)) // redirect to Login Activity
+                finish() // finish current activity
                 true
             }
             else -> {super.onOptionsItemSelected(item)}
