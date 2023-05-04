@@ -50,6 +50,9 @@ class QrCodeScanner : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+
+
+
         sharedpreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE)
 
         setTitle(R.string.qrcode)

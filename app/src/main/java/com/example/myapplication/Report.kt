@@ -13,13 +13,39 @@ import android.widget.Toast
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+
 import com.google.firebase.firestore.FirebaseFirestore
 
 class Report : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.nav_mapa -> {
+                Toast.makeText(this,"nav_mapa", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, parque::class.java))
+                true
+            }
 
+            R.id.nav_reportar -> {
+                Toast.makeText(this, "nav_reportar", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, Report::class.java))
+                true
+            }
+            R.id.nav_perfil -> {
+                Toast.makeText(this, "nav_perfil", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, perfil::class.java))
+                true
+            }
+
+            R.id.nav_noticias -> {
+                Toast.makeText(this, "nav_noticias", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, Noticias::class.java))
+                true
+            }
+            else -> {super.onOptionsItemSelected(item)}
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report)

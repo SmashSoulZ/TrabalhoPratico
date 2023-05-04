@@ -17,14 +17,7 @@
         android:icon="@drawable/baseline_3p_24"
 
         android:title="Perfil"/>
-    <item
-        android:id="@+id/nav_login"
-        android:icon="@drawable/baseline_login_24"
-        android:title="Login"/>
-    <item
-        android:id="@+id/nav_registar"
-        android:icon="@drawable/baseline_person_add_24"
-        android:title="Registar"/>
+
     <item
         android:id="@+id/nav_noticias"
         android:icon="@drawable/baseline_filter_list_24"

@@ -49,6 +49,11 @@ class perfil : AppCompatActivity() {
                 true
             }
 
+            R.id.nav_noticias -> {
+                Toast.makeText(this, "nav_noticias", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, Noticias::class.java))
+                true
+            }
             else -> {super.onOptionsItemSelected(item)}
         }
     }
