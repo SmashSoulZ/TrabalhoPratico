@@ -12,7 +12,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.*
-import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +41,27 @@ class MainActivity : AppCompatActivity() {
               startActivity(Intent(this, parque::class.java))
               true
           }
+          R.id.nav_filtros -> {
+              val dialogBinding = layoutInflater.inflate(R.layout.layout_definicoes, null)
+
+              val myDialog = Dialog ( this)
+              myDialog.setContentView(dialogBinding)
+
+              myDialog.setCancelable(true)
+              myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+              myDialog.show()
+              true
+          }
+          R.id.nav_lotacao -> {
+              Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
+              startActivity(Intent(this, lotacao::class.java))
+              true
+          }
+            R.id.nav_listagem -> {
+                Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, listagem::class.java))
+                true
+            }
 
           R.id.nav_reportar -> {
               Toast.makeText(this, "nav_reportar", Toast.LENGTH_SHORT).show()
