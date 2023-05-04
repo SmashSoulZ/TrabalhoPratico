@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
           }
           R.id.nav_lotacao -> {
               Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
+              startActivity(Intent(this, lotacao::class.java))
               true
           }
           R.id.nav_reportar -> {
