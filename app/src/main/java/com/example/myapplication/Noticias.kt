@@ -14,6 +14,7 @@ import com.example.myapplication.api.Article
 import com.example.myapplication.api.ServiceBuilder
 import com.example.myapplication.api.ServiceBuilder.newsApi
 import com.example.myapplication.api.TopHeadlinesResponse
+import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,6 +58,12 @@ class Noticias : AppCompatActivity() {
             R.id.nav_noticias -> {
                 Toast.makeText(this, "nav_noticias", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, Noticias::class.java))
+                true
+            }
+            R.id.nav_logout -> {
+                FirebaseAuth.getInstance().signOut() // sign out the user from Firebase Authentication
+                startActivity(Intent(this, Login::class.java)) // redirect to Login Activity
+                finish() // finish current activity
                 true
             }
             else -> {super.onOptionsItemSelected(item)}

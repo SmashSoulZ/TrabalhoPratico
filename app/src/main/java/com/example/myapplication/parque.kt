@@ -19,6 +19,7 @@ import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.myapplication.QrCodeScanner.Companion.PARAM_ID
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -43,6 +44,17 @@ class parque : AppCompatActivity() {
                 true
             }
 
+            R.id.nav_lotacao -> {
+                Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, lotacao::class.java))
+                true
+            }
+            R.id.nav_listagem -> {
+                Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, listagem::class.java))
+                true
+            }
+
             R.id.nav_reportar -> {
                 Toast.makeText(this, "nav_reportar", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, Report::class.java))
@@ -57,6 +69,12 @@ class parque : AppCompatActivity() {
             R.id.nav_noticias -> {
                 Toast.makeText(this, "nav_noticias", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, Noticias::class.java))
+                true
+            }
+            R.id.nav_logout -> {
+                FirebaseAuth.getInstance().signOut() // sign out the user from Firebase Authentication
+                startActivity(Intent(this, Login::class.java)) // redirect to Login Activity
+                finish() // finish current activity
                 true
             }
             else -> {super.onOptionsItemSelected(item)}

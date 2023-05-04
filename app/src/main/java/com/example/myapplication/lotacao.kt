@@ -13,6 +13,7 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.google.firebase.auth.FirebaseAuth
 
 class lotacao : AppCompatActivity() {
     private lateinit var barChart: BarChart
@@ -35,7 +36,7 @@ class lotacao : AppCompatActivity() {
                 true
             }
             R.id.nav_listagem -> {
-                Toast.makeText(this, "nav_listagem", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, listagem::class.java))
                 true
             }
@@ -54,6 +55,12 @@ class lotacao : AppCompatActivity() {
             R.id.nav_noticias -> {
                 Toast.makeText(this, "nav_noticias", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, Noticias::class.java))
+                true
+            }
+            R.id.nav_logout -> {
+                FirebaseAuth.getInstance().signOut() // sign out the user from Firebase Authentication
+                startActivity(Intent(this, Login::class.java)) // redirect to Login Activity
+                finish() // finish current activity
                 true
             }
             else -> {super.onOptionsItemSelected(item)}

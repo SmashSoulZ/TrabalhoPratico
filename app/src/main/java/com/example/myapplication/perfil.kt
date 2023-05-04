@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapter.LineAdapter
 import com.example.myapplication.dataclasses.registos
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import kotlin.math.max
 import kotlin.random.Random
 
@@ -43,7 +44,7 @@ class perfil : AppCompatActivity() {
                 true
             }
             R.id.nav_listagem -> {
-                Toast.makeText(this, "nav_listagem", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, listagem::class.java))
                 true
             }
@@ -62,6 +63,12 @@ class perfil : AppCompatActivity() {
             R.id.nav_noticias -> {
                 Toast.makeText(this, "nav_noticias", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, Noticias::class.java))
+                true
+            }
+            R.id.nav_logout -> {
+                FirebaseAuth.getInstance().signOut() // sign out the user from Firebase Authentication
+                startActivity(Intent(this, Login::class.java)) // redirect to Login Activity
+                finish() // finish current activity
                 true
             }
             else -> {super.onOptionsItemSelected(item)}

@@ -13,6 +13,7 @@ import android.widget.Toast
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import com.google.firebase.auth.FirebaseAuth
 
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -38,7 +39,7 @@ class Report : AppCompatActivity() {
                 true
             }
             R.id.nav_listagem -> {
-                Toast.makeText(this, "nav_listagem", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, listagem::class.java))
                 true
             }
@@ -57,6 +58,12 @@ class Report : AppCompatActivity() {
             R.id.nav_noticias -> {
                 Toast.makeText(this, "nav_noticias", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, Noticias::class.java))
+                true
+            }
+            R.id.nav_logout -> {
+                FirebaseAuth.getInstance().signOut() // sign out the user from Firebase Authentication
+                startActivity(Intent(this, Login::class.java)) // redirect to Login Activity
+                finish() // finish current activity
                 true
             }
             else -> {super.onOptionsItemSelected(item)}
