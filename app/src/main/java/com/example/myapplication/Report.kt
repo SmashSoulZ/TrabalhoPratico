@@ -16,6 +16,7 @@ import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class Report : AppCompatActivity() {
 
@@ -88,10 +89,19 @@ class Report : AppCompatActivity() {
 
                 db.collection("Report")
                     .add(userReport)
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Report enviado com sucesso!", Toast.LENGTH_SHORT).show()
-                        findViewById<EditText>(R.id.email).setText("")
-                        findViewById<EditText>(R.id.report).setText("")
+                    .addOnSuccessListener { documentReference ->
+                        val documentId = documentReference.id
+                        userReport["id"] = documentId // Add the document ID to the userReport map
+                        db.collection("Report").document(documentId).set(userReport)
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Report enviado com sucesso!", Toast.LENGTH_SHORT).show()
+                                findViewById<EditText>(R.id.email).setText("")
+                                findViewById<EditText>(R.id.report).setText("")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("parque", "Erro ao enviar o report", e)
+                                Toast.makeText(this, "Erro ao enviar o report", Toast.LENGTH_SHORT).show()
+                            }
                     }
                     .addOnFailureListener { e ->
                         Log.e("parque", "Erro ao enviar o report", e)
@@ -102,4 +112,7 @@ class Report : AppCompatActivity() {
             }
         }
     }
+
+
+
 }
