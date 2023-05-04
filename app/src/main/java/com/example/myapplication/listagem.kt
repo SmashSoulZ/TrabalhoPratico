@@ -1,24 +1,30 @@
 package com.example.myapplication
 
-import android.app.Dialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.widget.Toast
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
+import android.view.*
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.adapter.EstacionamentoAdapter
+import com.example.myapplication.adapter.LineAdapter
+
+import com.example.myapplication.dataclasses.Parked2
+import com.example.myapplication.dataclasses.registos
 
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlin.random.Random
 
-class Report : AppCompatActivity() {
+class listagem : AppCompatActivity() {
 
-    private lateinit var db: FirebaseFirestore
+    private lateinit var myList: ArrayList<Parked2>
+    private lateinit var recycler_view: RecyclerView
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater : MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
@@ -62,37 +68,38 @@ class Report : AppCompatActivity() {
             else -> {super.onOptionsItemSelected(item)}
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_report)
+        setContentView(R.layout.listagem)
 
-        db = FirebaseFirestore.getInstance()
+        myList = ArrayList<Parked2>()
 
-        val reportButton = findViewById<Button>(R.id.btnSubmit)
-        reportButton.setOnClickListener {
-            val email = findViewById<EditText>(R.id.email).text.toString().trim()
-            val report = findViewById<EditText>(R.id.report).text.toString().trim()
 
-            if (email.isNotEmpty() && report.isNotEmpty()) {
-                val userReport = hashMapOf(
-                    "email" to email,
-                    "report" to report
-                )
 
-                db.collection("Report")
-                    .add(userReport)
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Report enviado com sucesso!", Toast.LENGTH_SHORT).show()
-                        findViewById<EditText>(R.id.email).setText("")
-                        findViewById<EditText>(R.id.report).setText("")
-                    }
-                    .addOnFailureListener { e ->
-                        Log.e("parque", "Erro ao enviar o report", e)
-                        Toast.makeText(this, "Erro ao enviar o report", Toast.LENGTH_SHORT).show()
-                    }
-            } else {
-                Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show()
+        val db = FirebaseFirestore.getInstance()
+        val collectionRef = db.collection("Parques")
+
+
+        collectionRef.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val id = document.id
+                    val parked = document.getBoolean("parked") ?: false
+                    val status = if (parked) "Ocupado" else "Livre"
+                    myList.add(Parked2("Número do estacionamento: $id", "Disponibilidade: $status"))
+                }
+
+
+                recycler_view = findViewById<RecyclerView>(R.id.recycler_view)
+                recycler_view.adapter = EstacionamentoAdapter(myList)
+                recycler_view.layoutManager = LinearLayoutManager(this)
             }
-        }
+            .addOnFailureListener { exception ->
+                Log.e(TAG, "Erro ao buscar dados da Firestore", exception)
+            }
     }
+
+
+
 }

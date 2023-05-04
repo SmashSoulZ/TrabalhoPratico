@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:gravity="center"
+
             android:text="Cobertura" />
 
         <Button
@@ -46,9 +47,10 @@
             android:id="@+id/salvar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:text="salvar "
-            android:layout_gravity="center"/>
+            android:onClick="save"
+            android:text="salvar " />
 
     </LinearLayout>
 

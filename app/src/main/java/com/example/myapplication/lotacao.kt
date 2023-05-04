@@ -1,24 +1,21 @@
 package com.example.myapplication
 
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
-import android.util.Log
-import android.widget.Button
-import android.widget.EditText
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
-import com.google.firebase.firestore.FirebaseFirestore
-
-class Report : AppCompatActivity() {
-
-    private lateinit var db: FirebaseFirestore
+class lotacao : AppCompatActivity() {
+    private lateinit var barChart: BarChart
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater : MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
@@ -62,37 +59,41 @@ class Report : AppCompatActivity() {
             else -> {super.onOptionsItemSelected(item)}
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_report)
+        setContentView(R.layout.lotacao)
 
-        db = FirebaseFirestore.getInstance()
+        barChart = findViewById(R.id.bar_chart)
 
-        val reportButton = findViewById<Button>(R.id.btnSubmit)
-        reportButton.setOnClickListener {
-            val email = findViewById<EditText>(R.id.email).text.toString().trim()
-            val report = findViewById<EditText>(R.id.report).text.toString().trim()
+        // Configuração dos dados para o gráfico
+        val entries = mutableListOf<BarEntry>()
+        entries.add(BarEntry(1f, 10f))
+        entries.add(BarEntry(2f, 70f))
+        entries.add(BarEntry(3f, 20f))
+        entries.add(BarEntry(4f, 45f))
+        entries.add(BarEntry(5f, 100f))
+        entries.add(BarEntry(6f, 96f))
+        entries.add(BarEntry(7f,20f))
+        val dataSet = BarDataSet(entries, "Exemplo de dados")
+        dataSet.color = Color.BLUE
+        val data = BarData(dataSet)
 
-            if (email.isNotEmpty() && report.isNotEmpty()) {
-                val userReport = hashMapOf(
-                    "email" to email,
-                    "report" to report
-                )
+        // Configuração das opções do gráfico
+        barChart.data = data
+        barChart.setFitBars(true)
+        barChart.animateY(1000)
+        barChart.description.isEnabled = false
+        barChart.legend.isEnabled = false
+        barChart.axisRight.isEnabled = false
+        barChart.axisLeft.axisMinimum = 0f
+        barChart.xAxis.axisMinimum = 0f
+        barChart.xAxis.axisMaximum = 8f
 
-                db.collection("Report")
-                    .add(userReport)
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Report enviado com sucesso!", Toast.LENGTH_SHORT).show()
-                        findViewById<EditText>(R.id.email).setText("")
-                        findViewById<EditText>(R.id.report).setText("")
-                    }
-                    .addOnFailureListener { e ->
-                        Log.e("parque", "Erro ao enviar o report", e)
-                        Toast.makeText(this, "Erro ao enviar o report", Toast.LENGTH_SHORT).show()
-                    }
-            } else {
-                Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show()
-            }
-        }
+        // Formatação dos rótulos do eixo x para mostrar os dias da semana
+        val days = listOf("","Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab")
+        val formatter = IndexAxisValueFormatter(days)
+        barChart.xAxis.granularity = 1f
+        barChart.xAxis.valueFormatter = formatter
     }
 }

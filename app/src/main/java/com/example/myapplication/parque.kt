@@ -71,16 +71,7 @@ class parque : AppCompatActivity() {
         val scannedValue = intent.getStringExtra(PARAM_ID)
         println("............................lll...........")
         println(scannedValue)
-        val button2 = findViewById<Button>(R.id.filtros)
 
-        button2.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setView(R.layout.layout_definicoes)
-
-            val dialog = builder.create()
-
-            dialog.show()
-        }
         val dialogView = LayoutInflater.from(this).inflate(R.layout.layout_definicoes, null)
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
