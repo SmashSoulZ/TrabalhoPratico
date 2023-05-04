@@ -13,6 +13,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.*
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
