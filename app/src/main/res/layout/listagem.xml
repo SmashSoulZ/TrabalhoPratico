@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/historicoLabel"
+        android:padding="8dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/h1"
+            android:text="Listagem Parques"
+            android:textColor="@color/black"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical" />
+
+
+    <!-- layout do item da lista (layout_estacionamento.xml) -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rect_layout"
+        android:layout_width="@dimen/rect_width"
+        android:layout_height="@dimen/rect_height"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/cell_spacing"
+        android:layout_marginEnd="@dimen/cell_spacing"
+        android:background="@drawable/border" />
+
+</LinearLayout>
