@@ -29,12 +29,22 @@ class perfil : AppCompatActivity() {
         inflater.inflate(R.menu.menu, menu)
         return true
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.nav_mapa -> {
                 Toast.makeText(this,"nav_mapa", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, parque::class.java))
+                true
+            }
+
+            R.id.nav_lotacao -> {
+                Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, lotacao::class.java))
+                true
+            }
+            R.id.nav_listagem -> {
+                Toast.makeText(this, "nav_listagem", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, listagem::class.java))
                 true
             }
 
@@ -57,7 +67,6 @@ class perfil : AppCompatActivity() {
             else -> {super.onOptionsItemSelected(item)}
         }
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)

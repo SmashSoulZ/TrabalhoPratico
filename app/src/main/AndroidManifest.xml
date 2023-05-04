@@ -34,6 +34,9 @@
             android:name=".listagem"
             android:exported="true" />
         <activity
+            android:name=".Noticias"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -13,10 +13,7 @@
         android:icon="@drawable/baseline_map_24"
         android:title="Listagem"/>
 
-    <item
-        android:id="@+id/nav_filtros"
-        android:icon="@drawable/baseline_filter_list_24"
-        android:title="Filtros"/>
+
     <item
         android:id="@+id/nav_lotacao"
         android:icon="@drawable/baseline_local_parking_24"

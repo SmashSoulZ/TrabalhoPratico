@@ -3,6 +3,8 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,12 +19,27 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Noticias : AppCompatActivity() {
-
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater : MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.nav_mapa -> {
                 Toast.makeText(this,"nav_mapa", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, parque::class.java))
+                true
+            }
+
+            R.id.nav_lotacao -> {
+                Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, lotacao::class.java))
+                true
+            }
+            R.id.nav_listagem -> {
+                Toast.makeText(this, "nav_lotação", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, listagem::class.java))
                 true
             }
 
