@@ -38,7 +38,7 @@ private lateinit var firebaseAuth: FirebaseAuth
                     }
                 }
             }else{
-                Toast.makeText(this, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Todos os campos devem ser preenchidos helloooo There!! General kenobi ", Toast.LENGTH_SHORT).show()
             }
         }
 
